@@ -23,9 +23,9 @@ def get_session(fqdn, username, password):
                 f.write(r.text)
             return r.json()
         else:
-            print('Cloud not get session from GitLab.')
-            print(r.text)
-            exit(1)
+            # If we made a bad request (a 4XX client error or 5XX server error response),
+            # we can raise it with Response.raise_for_status()
+            r.raise_for_status()
 
 
 def main():
